@@ -1,0 +1,36 @@
+---
+suite:      musicvmcompiler
+version:    0.1.0.0
+
+aliases:
+  wpf:
+    - gac://System.Xaml
+    - gac://PresentationCore
+    - gac://PresentationFramework
+    - gac://WindowsBase
+    - nuget://System.Windows.Interactivity.WPF
+  avalonedit:
+    - nuget://AvalonEdit 
+  ncalc:
+    - nuget://ncalc 
+
+modules:
+  - name: mvc-main
+    projects:
+      - name: musicvmcompiler
+        type: windows-executable
+        csharp:
+          target-framework: 4.5
+        references:
+          - gac://System
+          - alias://wpf
+          - alias://avalonedit
+          - alias://ncalc
+
+products:
+  - name: mvc
+    modules:
+      - mvc-main
+
+
+    
