@@ -10,7 +10,7 @@
         xmlns:musicvmcompiler="clr-namespace:musicvmcompiler"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=model:MainWindowModel}"
-        Title="MainWindow" Height="350" Width="525" WindowState="Maximized">
+        Title="MainWindow" Height="350" Width="625" WindowState="Maximized">
     <Window.Resources>
         <Style x:Key="code" TargetType="{x:Type avalonedit:TextEditor}">
             <Setter Property="FontFamily" Value="Consolas" />
@@ -49,10 +49,10 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto"  />
+                <ColumnDefinition Width="Auto"  />
             </Grid.ColumnDefinitions>
             
             <ScrollViewer Grid.Column="0">
