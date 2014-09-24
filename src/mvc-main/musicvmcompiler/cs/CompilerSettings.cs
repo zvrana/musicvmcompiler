@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using musicvmcompiler.Utils;
 
 namespace musicvmcompiler
@@ -7,10 +6,16 @@ namespace musicvmcompiler
     public class CompilerSettings
     {
         private readonly Dictionary<string, int> parameterSlots = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> opcodes = new Dictionary<string, int>();
 
         public Dictionary<string, int> ParameterSlots
         {
             get { return parameterSlots; }
+        }
+
+        public Dictionary<string, int> Opcodes
+        {
+            get { return opcodes; }
         }
 
         public static CompilerSettings Default
@@ -48,6 +53,30 @@ namespace musicvmcompiler
                         {"CIDX_G3", 3},
                         
                         {"CIDX_PERIOD", 0}
+                    });
+
+                result.opcodes.AddAll(
+                    new Dictionary<string, int>
+                    {
+                        {"OPCODE_SETBUF", 0},
+                        {"OPCODE_SETFCONST", 1},
+                        {"OPCODE_SETTCONST", 2},
+                        {"OPCODE_SETICONST", 3},
+                        {"OPCODE_SETNOTE", 4},
+                        {"OPCODE_ZEROBUF", 5},
+                        {"OPCODE_ADD", 6},
+                        {"OPCODE_MULTIPLY", 7},
+                        {"OPCODE_MINBUF", 8},
+                        {"OPCODE_INTERPOLATE", 9},
+                        {"OPCODE_REPEAT_ENVELOPE", 10},
+                        {"OPCODE_MAKESIN", 11},
+                        {"OPCODE_POW3", 12},
+                        {"OPCODE_LFO", 13},
+                        {"OPCODE_RESONANT_FILTER", 14},
+                        {"OPCODE_REVERB", 15},
+                        {"OPCODE_BESSEL_FILTER", 16},
+                        {"OPCODE_DISTORT", 17},
+                        {"OPCODE_ADDRANGE", 18}
                     });
 
                 return result;

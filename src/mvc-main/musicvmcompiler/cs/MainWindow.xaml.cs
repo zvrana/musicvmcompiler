@@ -92,6 +92,10 @@ namespace musicvmcompiler
                 compilerSettings.ParameterSlots.Select(
                     entry => string.Format("{0}{1}", entry.Key.PadRight(30, '.'), entry.Value)));
          
+            Model.Opcodes = string.Join(Environment.NewLine,
+                compilerSettings.Opcodes.Select(
+                    entry => string.Format("{0}{1}", entry.Key.PadRight(30, '.'), entry.Value)));
+         
             Model.Output = compiler.Instructions.Select(WrapInstruction).ToList();
             
             Model.FloatConsts = string.Join(Environment.NewLine,

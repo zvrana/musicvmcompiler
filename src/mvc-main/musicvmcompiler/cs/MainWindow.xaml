@@ -49,6 +49,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             
             <ScrollViewer Grid.Column="0">
@@ -74,6 +75,13 @@
             </ScrollViewer>            
             
             <ScrollViewer Grid.Column="2">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource heading}">Opcodes:</TextBlock>
+                    <TextBlock Text="{Binding Opcodes}" Style="{StaticResource codeText}" />
+                </StackPanel>
+            </ScrollViewer>            
+            
+            <ScrollViewer Grid.Column="3">
                 <StackPanel>
                     <TextBlock Style="{StaticResource heading}">Float constants:</TextBlock>
                     <TextBlock Text="{Binding FloatConsts}" Style="{StaticResource codeText}" />

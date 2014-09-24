@@ -76,7 +76,8 @@ namespace musicvmcompiler.Model
         }
 
         public static readonly DependencyProperty OptimizedBytesProperty =
-            DependencyProperty.Register("OptimizedBytes", typeof (int?), typeof (MainWindowModel), new PropertyMetadata(default(int?)));
+            DependencyProperty.Register("OptimizedBytes", typeof (int?), typeof (MainWindowModel),
+                new PropertyMetadata(default(int?)));
 
         public int? OptimizedBytes
         {
@@ -91,6 +92,15 @@ namespace musicvmcompiler.Model
         {
             get { return (string) GetValue(ParameterSlotsProperty); }
             set { SetValue(ParameterSlotsProperty, value); }
+        }
+
+        public static readonly DependencyProperty OpcodesProperty = DependencyProperty.Register("Opcodes",
+            typeof (string), typeof (MainWindowModel), new PropertyMetadata(default(string)));
+
+        public string Opcodes
+        {
+            get { return (string) GetValue(OpcodesProperty); }
+            set { SetValue(OpcodesProperty, value); }
         }
     }
 }
