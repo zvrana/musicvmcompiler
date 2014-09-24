@@ -15,6 +15,7 @@ namespace musicvmcompiler
     {
         MainWindowModel Model { get; set; }
 
+        private CompilerSettings compilerSettings = CompilerSettings.Default;
 
         public MainWindow()
         {
@@ -81,16 +82,27 @@ namespace musicvmcompiler
         {
             var start = Environment.TickCount;
             var compiler = new Compiler();
-            
+
             compiler.Compile(Model.Input.Split(new[] {Environment.NewLine}, StringSplitOptions.None));
 
             var optimizer = new Optimizer();
             optimizer.Optimize(compiler.Instructions);
 
+            Model.ParameterSlots = string.Join(Environment.NewLine,
+                compilerSettings.ParameterSlots.Select(
+                    entry => string.Format("{0}{1}", entry.Key.PadRight(30, '.'), entry.Value)));
+         
             Model.Output = compiler.Instructions.Select(WrapInstruction).ToList();
-            Model.FloatConsts = string.Join(Environment.NewLine, compiler.FloatConsts.Values.Select(v => v.ToString(CultureInfo.InvariantCulture)));
-            Model.IntConsts = string.Join(Environment.NewLine, compiler.IntConsts.Values.Select(v => v.ToString(CultureInfo.InvariantCulture)));
-            Model.TickConsts = string.Join(Environment.NewLine, compiler.TickConsts.Values.Select(v => v.ToString(CultureInfo.InvariantCulture)));
+            
+            Model.FloatConsts = string.Join(Environment.NewLine,
+                compiler.FloatConsts.Values.Select(v => v.ToString(CultureInfo.InvariantCulture)));
+            
+            Model.IntConsts = string.Join(Environment.NewLine,
+                compiler.IntConsts.Values.Select(v => v.ToString(CultureInfo.InvariantCulture)));
+            
+            Model.TickConsts = string.Join(Environment.NewLine,
+                compiler.TickConsts.Values.Select(v => v.ToString(CultureInfo.InvariantCulture)));
+            
             Model.UnoptimizedBytes = compiler.Instructions.Sum(i => i.ToBytes().Length);
 
             Model.OptimizedBytes = compiler.Instructions.Where(i => i.Enabled).Sum(i => i.ToBytes().Length);

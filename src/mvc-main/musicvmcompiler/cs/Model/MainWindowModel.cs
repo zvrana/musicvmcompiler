@@ -82,5 +82,15 @@ namespace musicvmcompiler.Model
         {
             get { return (int?) GetValue(OptimizedBytesProperty); }
             set { SetValue(OptimizedBytesProperty, value); }
-        }    }
+        }
+
+        public static readonly DependencyProperty ParameterSlotsProperty = DependencyProperty.Register(
+            "ParameterSlots", typeof (string), typeof (MainWindowModel), new PropertyMetadata(default(string)));
+
+        public string ParameterSlots
+        {
+            get { return (string) GetValue(ParameterSlotsProperty); }
+            set { SetValue(ParameterSlotsProperty, value); }
+        }
+    }
 }

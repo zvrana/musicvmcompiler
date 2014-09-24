@@ -35,40 +35,56 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <avalonedit:TextEditor Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource code}">
-            <i:Interaction.Behaviors>
-                <ui:AvalonEditBehavior GiveMeTheText="{Binding Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </i:Interaction.Behaviors>
 
-        </avalonedit:TextEditor>
-        <ScrollViewer Grid.Row="1" Grid.Column="0">
-            <ItemsControl ItemsSource="{Binding Output}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Text}" Foreground="{Binding Foreground}" Style="{StaticResource codeText}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
-        <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <StackPanel>
-                <TextBlock Style="{StaticResource heading}">Float constants:</TextBlock>
-                <TextBlock Text="{Binding FloatConsts}" Style="{StaticResource codeText}" />
-                <TextBlock Style="{StaticResource heading}">Int constants:</TextBlock>
-                <TextBlock Text="{Binding IntConsts}" Style="{StaticResource codeText}" />
-                <TextBlock Style="{StaticResource heading}">Tick constants:</TextBlock>
-                <TextBlock Text="{Binding TickConsts}" Style="{StaticResource codeText}" />
-            </StackPanel>
-        </ScrollViewer>
+        <Grid Grid.Row="0" >
+            <avalonedit:TextEditor Style="{StaticResource code}">
+                <i:Interaction.Behaviors>
+                    <ui:AvalonEditBehavior GiveMeTheText="{Binding Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                </i:Interaction.Behaviors>
+            </avalonedit:TextEditor>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <ScrollViewer Grid.Column="0">
+                <ItemsControl ItemsSource="{Binding Output}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Text}" Foreground="{Binding Foreground}" Style="{StaticResource codeText}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+            <ScrollViewer Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource heading}">Parameter slots:</TextBlock>
+                    <TextBlock Text="{Binding ParameterSlots}" Style="{StaticResource codeText}" />
+                </StackPanel>
+            </ScrollViewer>            
+            
+            <ScrollViewer Grid.Column="2">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource heading}">Float constants:</TextBlock>
+                    <TextBlock Text="{Binding FloatConsts}" Style="{StaticResource codeText}" />
+                    <TextBlock Style="{StaticResource heading}">Int constants:</TextBlock>
+                    <TextBlock Text="{Binding IntConsts}" Style="{StaticResource codeText}" />
+                    <TextBlock Style="{StaticResource heading}">Tick constants:</TextBlock>
+                    <TextBlock Text="{Binding TickConsts}" Style="{StaticResource codeText}" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        
         <Border Grid.Row="2" Grid.ColumnSpan="2" Padding="3">
             <StackPanel Orientation="Horizontal">
                 <Button Click="CompileOnClick">Compile</Button>
