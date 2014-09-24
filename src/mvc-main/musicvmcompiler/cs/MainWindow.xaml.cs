@@ -3,7 +3,8 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
-using musicvmcompiler.Instructions;
+using musicvmcompiler.Engine;
+using musicvmcompiler.Engine.Instructions;
 using musicvmcompiler.Model;
 
 namespace musicvmcompiler
