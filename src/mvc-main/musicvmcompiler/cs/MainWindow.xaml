@@ -7,6 +7,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:model="clr-namespace:musicvmcompiler.Model"
+        xmlns:musicvmcompiler="clr-namespace:musicvmcompiler"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=model:MainWindowModel}"
         Title="MainWindow" Height="350" Width="525" WindowState="Maximized">
@@ -28,6 +29,7 @@
             <Setter Property="Padding" Value="3" />
             <Setter Property="Background" Value="GhostWhite" />
         </Style>
+        <musicvmcompiler:PercentageConverter x:Key="PercentageConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -49,6 +51,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             
@@ -82,6 +85,31 @@
             </ScrollViewer>            
             
             <ScrollViewer Grid.Column="3">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource heading}">Bytecode statistics:</TextBlock>
+                    <ItemsControl ItemsSource="{Binding Statistics}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding B}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                                    <Grid Grid.Column="1" Name="parentGrid" HorizontalAlignment="Left" Margin="3" SnapsToDevicePixels="True">
+                                        <Border Background="#80aa4444" HorizontalAlignment="Left" Width="{Binding UnoptimizedFrequency, Converter={StaticResource PercentageConverter}, ConverterParameter=200}"/>
+                                        <Border Background="#804444aa" HorizontalAlignment="Left" Width="{Binding OptimizedFrequency, Converter={StaticResource PercentageConverter}, ConverterParameter=200}"/>
+                                        <Border BorderBrush="Black" BorderThickness=".5" />
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>            
+            
+            <ScrollViewer Grid.Column="4">
                 <StackPanel>
                     <TextBlock Style="{StaticResource heading}">Float constants:</TextBlock>
                     <TextBlock Text="{Binding FloatConsts}" Style="{StaticResource codeText}" />

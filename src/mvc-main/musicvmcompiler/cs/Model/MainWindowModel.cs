@@ -102,5 +102,15 @@ namespace musicvmcompiler.Model
             get { return (string) GetValue(OpcodesProperty); }
             set { SetValue(OpcodesProperty, value); }
         }
+
+        public static readonly DependencyProperty StatisticsProperty =
+            DependencyProperty.Register("Statistics", typeof (List<StatisticsModel>), typeof (MainWindowModel),
+                new PropertyMetadata(default(List<StatisticsModel>)));
+
+        public List<StatisticsModel> Statistics
+        {
+            get { return (List<StatisticsModel>) GetValue(StatisticsProperty); }
+            set { SetValue(StatisticsProperty, value); }
+        }
     }
 }

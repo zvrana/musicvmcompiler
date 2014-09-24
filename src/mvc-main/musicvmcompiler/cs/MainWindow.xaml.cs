@@ -112,6 +112,17 @@ namespace musicvmcompiler
 
             Model.OptimizedBytes = compiler.Instructions.Where(i => i.Enabled).Sum(i => i.ToBytes().Length);
 
+            var statistics = new Statistics(compiler);
+
+            var optimizedByteFrequencies = statistics.OptimizedByteFrequencies.ToFrequencies();
+            var unoptimizedByteFrequencies = statistics.UnoptimizedByteFrequencies.ToFrequencies();
+
+            Model.Statistics =
+                statistics
+                .AllBytes
+                .Select(b => new StatisticsModel(b, optimizedByteFrequencies[b], unoptimizedByteFrequencies[b]))
+                .ToList();
+
             var end = Environment.TickCount;
             Model.CompileTime = end - start;
         }
