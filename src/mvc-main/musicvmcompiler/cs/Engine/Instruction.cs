@@ -35,10 +35,10 @@ namespace musicvmcompiler.Engine
             return result;
         }
 
-        public virtual string ToListing()
+        public virtual string ToListing(OpcodeMap opcodeMap)
         {
             var builder = new StringBuilder();
-            var bytes = ToBytes();
+            var bytes = ToBytes(opcodeMap);
 
             foreach (var b in bytes)
             {

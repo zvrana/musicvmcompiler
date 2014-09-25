@@ -24,7 +24,7 @@
             get { return new string[0]; }
         }
 
-        public override string ToListing()
+        public override string ToListing(OpcodeMap opcodeMap)
         {
             return string.Format("// {0}", line);
         }

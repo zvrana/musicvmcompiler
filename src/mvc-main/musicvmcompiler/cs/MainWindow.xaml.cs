@@ -105,7 +105,7 @@ namespace musicvmcompiler
                         new OpcodeModel(entry.Name.PadRight(30, '.'), entry.Value,
                             usedOpcodes.Contains(entry.Value) ? Brushes.Black : Brushes.Silver)).ToList();
          
-            Model.Output = compiler.Instructions.Select(WrapInstruction).ToList();
+            Model.Output = compiler.Instructions.Select(i => WrapInstruction(i, opcodeMap)).ToList();
             
             Model.FloatConsts = string.Join(Environment.NewLine,
                 compiler.FloatConsts.Values.Select(v => v.ToString(CultureInfo.InvariantCulture)));
@@ -137,7 +137,7 @@ namespace musicvmcompiler
             Model.CompileTime = end - start;
         }
 
-        private InstructionModel WrapInstruction(Instruction instruction)
+        private InstructionModel WrapInstruction(Instruction instruction, OpcodeMap opcodeMap)
         {
             var foreground = Brushes.Black;
             if (!instruction.Enabled)
@@ -151,7 +151,7 @@ namespace musicvmcompiler
             return new InstructionModel()
             {
                 Foreground = foreground,
-                Text = instruction.ToListing()
+                Text = instruction.ToListing(opcodeMap)
             };            
         }
     }
