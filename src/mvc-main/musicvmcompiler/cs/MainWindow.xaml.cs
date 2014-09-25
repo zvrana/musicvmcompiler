@@ -89,13 +89,16 @@ namespace musicvmcompiler
             var optimizer = new Optimizer();
             optimizer.Optimize(compiler.Instructions);
 
+            var opcodeMap = new OpcodeMap();
+            opcodeMap.AssignOpcodesByFrequency(compiler.Instructions);
+
             Model.ParameterSlots = string.Join(Environment.NewLine,
                 compilerSettings.ParameterSlots.Select(
                     entry => string.Format("{0}{1}", entry.Key.PadRight(30, '.'), entry.Value)));
          
             Model.Opcodes = string.Join(Environment.NewLine,
-                compilerSettings.Opcodes.Select(
-                    entry => string.Format("{0}{1}", entry.Key.PadRight(30, '.'), entry.Value)));
+                opcodeMap.Map.Values.Select(
+                    entry => string.Format("{0}{1}", entry.Name.PadRight(30, '.'), entry.Value)));
          
             Model.Output = compiler.Instructions.Select(WrapInstruction).ToList();
             
@@ -117,11 +120,13 @@ namespace musicvmcompiler
             var optimizedByteFrequencies = statistics.OptimizedByteFrequencies.ToFrequencies();
             var unoptimizedByteFrequencies = statistics.UnoptimizedByteFrequencies.ToFrequencies();
 
-            Model.Statistics =
+            var bytecodeStatistics =
                 statistics
                 .AllBytes
                 .Select(b => new StatisticsModel(b, optimizedByteFrequencies[b], unoptimizedByteFrequencies[b]))
                 .ToList();
+
+            Model.BytecodeStatistics = bytecodeStatistics;
 
             var end = Environment.TickCount;
             Model.CompileTime = end - start;

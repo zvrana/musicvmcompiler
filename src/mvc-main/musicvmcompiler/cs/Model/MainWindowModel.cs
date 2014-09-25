@@ -104,10 +104,10 @@ namespace musicvmcompiler.Model
         }
 
         public static readonly DependencyProperty StatisticsProperty =
-            DependencyProperty.Register("Statistics", typeof (List<StatisticsModel>), typeof (MainWindowModel),
+            DependencyProperty.Register("BytecodeStatistics", typeof (List<StatisticsModel>), typeof (MainWindowModel),
                 new PropertyMetadata(default(List<StatisticsModel>)));
 
-        public List<StatisticsModel> Statistics
+        public List<StatisticsModel> BytecodeStatistics
         {
             get { return (List<StatisticsModel>) GetValue(StatisticsProperty); }
             set { SetValue(StatisticsProperty, value); }

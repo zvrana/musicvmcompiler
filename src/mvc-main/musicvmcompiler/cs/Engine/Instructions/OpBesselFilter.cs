@@ -2,7 +2,7 @@
 {
     public class OpBesselFilter : PureInstruction
     {
-        public OpBesselFilter() : base(Opcodes.Bessel_filter)
+        public OpBesselFilter() : base(Opcodes.BesselFilter)
         {
         }
     }

@@ -2,7 +2,7 @@
 {
     public class OpRepeatEnvelope : PureInstruction
     {
-        public OpRepeatEnvelope() : base(Opcodes.Repeat_envelope)
+        public OpRepeatEnvelope() : base(Opcodes.RepeatEnvelope)
         {
         }
     }
