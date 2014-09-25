@@ -80,5 +80,10 @@ namespace musicvmcompiler.Engine
 
             return counts.ToDictionary(entry => entry.Key, entry => entry.Value/d);
         }
+
+        public byte[] GetMostFrequentBytes()
+        {
+            return counts.Keys.OrderBy(b => -(counts[b] * 256 + b)).ToArray();
+        }
     }
 }

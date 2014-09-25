@@ -26,6 +26,15 @@ namespace musicvmcompiler.Engine
         public Opcodes Opcode { get { return opcode; } }
         public bool Enabled { get; set; }
 
+        public byte[] ToBytes(OpcodeMap opcodeMap)
+        {
+            var result = ToBytes();
+
+            result[0] = opcodeMap.Map[Opcode].Value;
+
+            return result;
+        }
+
         public virtual string ToListing()
         {
             var builder = new StringBuilder();

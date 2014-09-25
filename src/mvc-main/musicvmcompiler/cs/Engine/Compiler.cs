@@ -271,5 +271,6 @@ namespace musicvmcompiler.Engine
             instructions.Add(new OpSetFConst(0, amount));
             instructions.Add(new OpReverb());
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -95,10 +96,14 @@ namespace musicvmcompiler
             Model.ParameterSlots = string.Join(Environment.NewLine,
                 compilerSettings.ParameterSlots.Select(
                     entry => string.Format("{0}{1}", entry.Key.PadRight(30, '.'), entry.Value)));
-         
-            Model.Opcodes = string.Join(Environment.NewLine,
+
+            var usedOpcodes = new HashSet<byte>(compiler.Instructions.Select(i => opcodeMap.Map[i.Opcode].Value));
+
+            Model.Opcodes =
                 opcodeMap.Map.Values.Select(
-                    entry => string.Format("{0}{1}", entry.Name.PadRight(30, '.'), entry.Value)));
+                    entry =>
+                        new OpcodeModel(entry.Name.PadRight(30, '.'), entry.Value,
+                            usedOpcodes.Contains(entry.Value) ? Brushes.Black : Brushes.Silver)).ToList();
          
             Model.Output = compiler.Instructions.Select(WrapInstruction).ToList();
             

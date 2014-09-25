@@ -80,7 +80,16 @@
             <ScrollViewer Grid.Column="2">
                 <StackPanel>
                     <TextBlock Style="{StaticResource heading}">Opcodes:</TextBlock>
-                    <TextBlock Text="{Binding Opcodes}" Style="{StaticResource codeText}" />
+                    <ItemsControl ItemsSource="{Binding Opcodes}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" Foreground="{Binding Foreground}" Style="{StaticResource codeText}" />
+                                    <TextBlock Text="{Binding Value}" Foreground="{Binding Foreground}" Style="{StaticResource codeText}"  />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </ScrollViewer>            
             

@@ -95,11 +95,11 @@ namespace musicvmcompiler.Model
         }
 
         public static readonly DependencyProperty OpcodesProperty = DependencyProperty.Register("Opcodes",
-            typeof (string), typeof (MainWindowModel), new PropertyMetadata(default(string)));
+            typeof(List<OpcodeModel>), typeof(MainWindowModel), new PropertyMetadata(default(string)));
 
-        public string Opcodes
+        public List<OpcodeModel> Opcodes
         {
-            get { return (string) GetValue(OpcodesProperty); }
+            get { return (List<OpcodeModel>)GetValue(OpcodesProperty); }
             set { SetValue(OpcodesProperty, value); }
         }
 
