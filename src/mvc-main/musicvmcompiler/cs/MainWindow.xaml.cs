@@ -128,10 +128,25 @@ namespace musicvmcompiler
             var bytecodeStatistics =
                 statistics
                 .AllBytes
-                .Select(b => new StatisticsModel(b, optimizedByteFrequencies[b], unoptimizedByteFrequencies[b]))
+                .Select(b => new StatisticsModel<byte>(b, optimizedByteFrequencies[b], unoptimizedByteFrequencies[b]))
                 .ToList();
 
             Model.BytecodeStatistics = bytecodeStatistics;
+
+            var optimizedOpcodeFrequencies =
+                new Frequencies(
+                    compiler.Instructions.Where(i => i.Enabled && !(i is Comment))
+                        .Select(i => (byte) i.Opcode)
+                        .ToArray());
+
+            var opcodeStatistics =
+                optimizedOpcodeFrequencies
+                .ToFrequencies()
+                .Select(entry => new StatisticsModel<string>(((Opcodes)entry.Key).ToString(), entry.Value, 0))
+                .OrderBy(m => -m.OptimizedFrequency)
+                .ToList();
+
+            Model.OpcodeStatistics = opcodeStatistics;
 
             var end = Environment.TickCount;
             Model.CompileTime = end - start;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using musicvmcompiler.Engine;
 
 namespace musicvmcompiler.Model
 {
@@ -95,22 +96,33 @@ namespace musicvmcompiler.Model
         }
 
         public static readonly DependencyProperty OpcodesProperty = DependencyProperty.Register("Opcodes",
-            typeof(List<OpcodeModel>), typeof(MainWindowModel), new PropertyMetadata(default(string)));
+            typeof (List<OpcodeModel>), typeof (MainWindowModel), new PropertyMetadata(default(string)));
 
         public List<OpcodeModel> Opcodes
         {
-            get { return (List<OpcodeModel>)GetValue(OpcodesProperty); }
+            get { return (List<OpcodeModel>) GetValue(OpcodesProperty); }
             set { SetValue(OpcodesProperty, value); }
         }
 
         public static readonly DependencyProperty StatisticsProperty =
-            DependencyProperty.Register("BytecodeStatistics", typeof (List<StatisticsModel>), typeof (MainWindowModel),
-                new PropertyMetadata(default(List<StatisticsModel>)));
+            DependencyProperty.Register("BytecodeStatistics", typeof (List<StatisticsModel<byte>>),
+                typeof (MainWindowModel),
+                new PropertyMetadata(default(List<StatisticsModel<byte>>)));
 
-        public List<StatisticsModel> BytecodeStatistics
+        public List<StatisticsModel<byte>> BytecodeStatistics
         {
-            get { return (List<StatisticsModel>) GetValue(StatisticsProperty); }
+            get { return (List<StatisticsModel<byte>>) GetValue(StatisticsProperty); }
             set { SetValue(StatisticsProperty, value); }
+        }
+
+        public static readonly DependencyProperty OpcodeStatisticsProperty =
+            DependencyProperty.Register("OpcodeStatistics", typeof (List<StatisticsModel<string>>),
+                typeof (MainWindowModel), new PropertyMetadata(default(List<StatisticsModel<string>>)));
+
+        public List<StatisticsModel<string>> OpcodeStatistics
+        {
+            get { return (List<StatisticsModel<string>>) GetValue(OpcodeStatisticsProperty); }
+            set { SetValue(OpcodeStatisticsProperty, value); }
         }
     }
 }

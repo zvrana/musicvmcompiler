@@ -1,19 +1,19 @@
 ﻿namespace musicvmcompiler.Model
 {
-    public class StatisticsModel
+    public class StatisticsModel<T>
     {
-        private readonly byte b;
+        private readonly T b;
         private readonly double optimizedFrequency;
         private readonly double unoptimizedFrequency;
 
-        public StatisticsModel(byte b, double optimizedFrequency, double unoptimizedFrequency)
+        public StatisticsModel(T b, double optimizedFrequency, double unoptimizedFrequency)
         {
             this.b = b;
             this.optimizedFrequency = optimizedFrequency;
             this.unoptimizedFrequency = unoptimizedFrequency;
         }
 
-        public byte B
+        public T B
         {
             get { return b; }
         }

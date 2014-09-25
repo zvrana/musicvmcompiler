@@ -53,6 +53,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto"  />
                 <ColumnDefinition Width="Auto"  />
+                <ColumnDefinition Width="Auto"  />
             </Grid.ColumnDefinitions>
             
             <ScrollViewer Grid.Column="0">
@@ -91,9 +92,34 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
-            </ScrollViewer>            
-            
+            </ScrollViewer>
+
             <ScrollViewer Grid.Column="3">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource heading}">Opcode statistics:</TextBlock>
+                    <ItemsControl ItemsSource="{Binding OpcodeStatistics}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding B}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" />
+                                    <Grid Grid.Column="1" Name="parentGrid" HorizontalAlignment="Left" Margin="3" SnapsToDevicePixels="True">
+                                        <Border Background="#60ff4444" HorizontalAlignment="Left" Width="{Binding UnoptimizedFrequency, Converter={StaticResource PercentageConverter}, ConverterParameter=200}"/>
+                                        <Border Background="#804444aa" HorizontalAlignment="Left" Width="{Binding OptimizedFrequency, Converter={StaticResource PercentageConverter}, ConverterParameter=200}"/>
+                                        <Border BorderBrush="Black" BorderThickness=".5" />
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+
+            <ScrollViewer Grid.Column="4">
                 <StackPanel>
                     <TextBlock Style="{StaticResource heading}">Bytecode statistics:</TextBlock>
                     <ItemsControl ItemsSource="{Binding BytecodeStatistics}">
@@ -113,12 +139,12 @@
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                        
+
                     </ItemsControl>
                 </StackPanel>
-            </ScrollViewer>            
-            
-            <ScrollViewer Grid.Column="4">
+            </ScrollViewer>
+
+            <ScrollViewer Grid.Column="5">
                 <StackPanel>
                     <TextBlock Style="{StaticResource heading}">Float constants:</TextBlock>
                     <TextBlock Text="{Binding FloatConsts}" Style="{StaticResource codeText}" />
