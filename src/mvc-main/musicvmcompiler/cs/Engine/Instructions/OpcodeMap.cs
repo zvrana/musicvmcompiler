@@ -41,6 +41,7 @@ namespace musicvmcompiler.Engine.Instructions
 
         public void AssignOpcodesByFrequency(IEnumerable<Instruction> instructions)
         {
+            // TODO: fix this
             var optimizedInstructionBytes =
                 instructions
                     .Where(i => i.Enabled)
